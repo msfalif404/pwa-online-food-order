@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./images/chicken.svg" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- User Defined Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Boxicon -->
+    <link href='./css/boxicons.min.css' rel='stylesheet'>
+    <!-- Mapbox -->
+    <script src="./js/mapbox-gl.js"></script>
+    <link href="./css/mapbox-gl.css" rel="stylesheet" />
+    <!-- Manifest.json -->
+    <link rel="manifest" href="./manifest.json">
+    <title>Product Detail | Jajan Yuk</title>
+</head>
+<body class="bg-light">
+    <script src="./js/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="./css/mapbox-gl-geocoder.css" type="text/css" />
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top" id="navbar" style="z-index: 9999;">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-none d-lg-block font-weight-bold">JAJAN YUK</a>
+            <form class="mx-auto w-100 d-lg-none">
+                <div class="input-group">
+                    <input type="text" name="menu-search-mobile" id="menu-search-mobile" class="form-control border-0 menu-search" placeholder="Cari Jajanan Yuk..." data-toggle="modal" data-target="#modal-small" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary search-button" type="button" id="search-button-mobile"><i class='bx bx-search' ></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="collapse navbar-collapse">
+                <form class="mx-auto w-75">
+                    <div class="input-group">
+                        <input type="text" name="menu-search" id="menu-search" class="form-control menu-search border-right-0" placeholder="Cari Jajanan Yuk..." data-toggle="modal" data-target="#modal-large" autocomplete="off">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary search-button" type="button" id="search-button"><i class='bx bx-search' ></i></button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="my-2" id="customer-auth-nav">
+                    <a href="./customer/login.html" class="btn bg-white border-primary">Masuk</a>
+                    <a href="./customer/register.html" class="btn btn-primary">Daftar</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Product Details -->
+    <section class="bg-white mt-5 mb-5 my-lg-4 py-5">
+        <div class="container" id="product-detail">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border text-primary"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer On Dekstop -->
+    <footer id="footer" class="bg-dark d-none d-lg-block text-white py-4 ">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-4 text-md-left">
+                    <h4>Jajan Yuk</h4>
+                    <p>Temukan berbagai macam pilihan makanan menarik yang siap diantarkan sampai ke rumah anda</p>
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h4>Tentang</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Tentang Kami</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Privacy Policy</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Terms Of Service</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h4>Berlangganan Sekarang</h4>
+                    <p>Mulai berlangganan sekarang untuk mendapatkan promo terbaik dari kami !</p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Masukan Email Anda">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" type="button">Okay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="w-100 bg-white">
+            <div class="row">
+                <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                    <div>
+                        <p>&copy; 2021 - 2022 Jajan Yuk</p>
+                    </div>
+                    <div>
+                        <i class='bx bxl-facebook-circle bx-sm hovered-icon'></i>
+                        <i class='bx bxl-instagram-alt bx-sm hovered-icon'></i>
+                        <i class='bx bxl-twitter bx-sm hovered-icon'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation Bar On Mobile -->
+    <nav id="bottom-navbar-container" class="bg-white border-top fixed-bottom d-lg-none d-flex justify-content-center align-items-center w-100 py-2">
+        <a href="./index.html#all-products" id="all-products" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i href="./index.html#all-products" class='bx bx-home bx-xs'></i>
+            <span href="./index.html#all-products">All Product</span>
+        </a>
+        
+        <a href="./index.html#cart" id="cart" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i href="./index.html#cart" class='bx bxs-cart bx-xs'></i>
+            <span href="./index.html#cart">Cart</span>
+        </a>
+        
+        <a href="./index.html#account-detail" id="account-detail" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i href="./index.html#account-detail" class='bx bx-user' ></i>
+            <span href="./index.html#account-detail">Account</span>
+        </a>
+    </nav>
+
+    <!-- Modal Large -->
+    <div class="modal fade" id="modal-large" tabindex="-1" style="z-index: 99999;" data-focus="false">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="list-group list-group-flush overflow-auto search-suggest search-suggest>
+                    <li class="list-group-item">Silahkan cari menu...</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Small -->
+    <div class="modal fade" id="modal-small" tabindex="-1" style="z-index: 99999;" data-focus="false">
+        <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="list-group list-group-flush overflow-auto search-suggest">
+                    <li class="list-group-item">Silahkan cari menu...</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Ask Change Location Modal -->
+    <div class="modal fade" id="changeLocationModal" tabindex="-1" role="dialog" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Apakah anda ingin mengganti lokasi ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body d-flex justify-content-center align-items-center">
+                <a href="#" class="btn btn-secondary mr-auto" id="no-use-current">Tidak, gunakan lokasi yang sudah ada</a>
+                <a href="#" class="btn btn-primary" id="yes-change-current">Ganti Lokasi</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <!-- Modal center -->
+    <div class="modal fade mt-1" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Silahkan Cari Lokasi Anda Terlebih Dahulu</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" style="position: relative;height:300px;">
+                <div id="map" style="position: static;width: inherit;height: inherit;"></div>
+            </div>
+            <div class="modal-footer d-block">
+                <div class="" id="location-alert-container"></div>
+                <div class="border">
+                    <input type="text" name="jalan" id="jalan" class="form-control py-4 border-0" placeholder="Nama Jalan... Contoh (Jl. Masjid Nurul Yaqin)" required>
+                </div>
+                <button class="btn btn-primary btn-block" id="check-location">Cek Lokasi</button>
+                <div class="" id="product-process-button-after"></div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/idb.js"></script>
+    <script src="./js/db.js"></script>
+    <script type="module">
+        import {getProductDetail} from "./js/services/api/product-detail.js";
+        import {checkLocation} from "./js/services/api/check-location.js";
+
+        const CUSTOMER_TOKEN = JSON.parse(localStorage.getItem("CUSTOMER_TOKEN")) ?? null;
+        if(CUSTOMER_TOKEN != null){
+            const navbar = document.getElementById("navbar");
+            navbar.classList.remove("py-3");
+            const customerAuthNavLink = document.querySelectorAll("#customer-auth-nav a");
+            customerAuthNavLink.forEach(element => {
+                element.style.display = "none";
+            });
+            const customerAuthNavContainer = document.getElementById("customer-auth-nav");
+            customerAuthNavContainer.innerHTML = `<a class="text-dark" href="./index.html#account-detail"><i class='bx bx-user bx-sm hovered-icon'></i></a>`;
+        }
+        const menuSearch = document.querySelectorAll(".menu-search");
+        dbGetAllProductsIndex().then(data => {
+                    if(data){
+                        menuSearch.forEach(element => {
+                            element.addEventListener("keyup", function(event){
+                                let menuInputValue = event.target.value.toLowerCase();
+                                if(menuInputValue != ""){   
+                                    let filteredMenuObject = data[0].filter(element => {
+                                        return element.name.toLowerCase().startsWith(menuInputValue.toLocaleLowerCase()); 
+                                    });
+                                    filteredMenuObject.slice(1,2);
+                                    if(filteredMenuObject.length == 0){
+                                        document.querySelectorAll(".search-suggest").forEach(element => {
+                                            element.innerHTML = `<li class="list-group-item">Tidak ditemukan...</li>`;
+                                        });
+                                    }
+                                    else {
+                                        let dataMenuSuggestRaw = "";
+                                        filteredMenuObject.forEach(element => {
+                                            const {id, name, path} = element;
+                                            dataMenuSuggestRaw += `<a href="product-details.html?id=${id}" class="border-none"><li class="list-group-item d-flex flex-column"><p class="text-dark">${name}</p><div><img src="https://rest-orderapp.herokuapp.com/${path}" class="img-fluid rounded" style="width:20%;" /></div></li></a>`;
+                                        });
+                                        document.querySelectorAll(".search-suggest").forEach(element => {
+                                            element.innerHTML = dataMenuSuggestRaw;
+                                        });
+                                    }
+                                }
+                                else {
+                                    document.querySelectorAll(".search-suggest").forEach(element => {
+                                            element.innerHTML = `<li class="list-group-item">Silahkan cari menu...</li>`;
+                                    });
+                                }
+                            });
+                        });
+                    }
+                });
+
+        let urlParams = new URLSearchParams(window.location.search);
+        let idParam = urlParams.get("id");
+
+        getProductDetail(idParam).then(response => {
+            console.log(response);
+            if(response.msg == "success"){
+                document.getElementById("product-detail").innerHTML = `<div class="row d-none d-lg-block">
+                <div class="col-12">
+                    <nav>
+                        <ol class="breadcrumb bg-white">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" id="current-product"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card">
+                        <img src="images/pizza_about_page.jpg" class="img-fluid" id="product-image">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 id="product-name"></h2>
+                    <div>
+                        <p class="text-muted">Harga : <span class="text-dark" id="product-price"></span></p>
+                        <p class="text-muted">Deskripsi : <span class="text-dark" id="product-description"></span></p>
+                        <p class="text-muted">Rating : <span id="product-rating"></span></p>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-block" id="product-process-button">Beli Menu</a>
+                </div>
+            </div>
+            <section id="rating-container"><h3>Rating dan Ulasan</h3></section>
+            <a href="#" class="btn btn-primary" id="load-more">Tampilkan Lebih Banyak Rating dan Ulasan</a>`;
+                const {data: {id, name, path, price, description, detailRaiting, raiting}} = response;
+                document.getElementById("current-product").innerHTML = name;
+                // document.getElementById("product-image").src = `.images/pizza_about_page.jpg`;
+                document.getElementById("product-name").innerHTML = name;
+                document.getElementById("product-price").innerHTML = `Rp. ${price.toLocaleString("ID-id")}`;
+                document.getElementById("product-description").innerHTML = description;
+                if(raiting != null){
+                    let starsHTML = "";
+                        for(let i = 0; i < parseInt(raiting); i++){
+                            starsHTML += `<i class='bx bxs-star bx-xs' style="color: orange;"></i>`;
+                        }
+                    document.getElementById("product-rating").innerHTML = starsHTML;
+                }
+                else {
+                    document.getElementById("product-rating").innerHTML = "Belum ada yang menilai produk ini...";
+                    document.getElementById("product-rating").classList.add("text-dark");
+                }
+                
+                const loadMoreButton = document.getElementById("load-more");
+                if(detailRaiting.length != 0){
+                    let currentIndex = 0;
+                        function loadMoreData(){
+                        let maxResult = 3;
+                        for(let i = 0; i < maxResult; i++){
+                            let starsHTML = "";
+                            if(i + currentIndex == detailRaiting.length){
+                                loadMoreButton.classList.add("d-none");
+                            }
+                            for(let j = 0; j < detailRaiting[i + currentIndex].star; j++){
+                                starsHTML += `<i class='bx bxs-star bx-xs' style="color: orange;"></i>`;
+                            }
+                            let convertedDate = new Date(detailRaiting[i + currentIndex].createAt);
+                            $("#rating-container").append(`<div class="media mt-4">
+                                <div class="media-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mt-0">${detailRaiting[i + currentIndex].customer.name}</h5>
+                                    <small class="text-muted">${convertedDate.toLocaleDateString()}</small>
+                                </div>
+                                <div>${starsHTML}</div>
+                                <p>${detailRaiting[i + currentIndex].reason}</p>
+                                </div>
+                            </div>
+                            </div></div>`);
+                        }
+                        currentIndex += maxResult;
+                    }
+                    loadMoreData();
+                    loadMoreButton.addEventListener("click", function(event){
+                        event.preventDefault();
+                        loadMoreData();
+                    });
+                }
+                else {
+                    loadMoreButton.classList.add("d-none");
+                    document.getElementById("rating-container").innerHTML = "<h3>Rating dan Ulasan</h3><p>Belum ada yang menilai produk ini...</p>";
+                }
+
+                // const hiddenRating = document.querySelectorAll(".hidden-rating");
+                // console.log(hiddenRating);
+
+                mapboxgl.accessToken = 'pk.eyJ1IjoibXNmYWxpZjQwNCIsImEiOiJja2l2cHB5bTkwZXQ1MnhwMjM4b2g3d3VxIn0.FD3kHp-lu3fs01m4ATAycw';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [106.8542, -6.4817],
+                    zoom: 13
+                });
+                
+                var geocoder =  new MapboxGeocoder({
+                    accessToken: mapboxgl.accessToken,
+                    mapboxgl: mapboxgl,
+                    placeholder: "Cari Alamat"
+                });
+                map.addControl(geocoder);
+
+                let latitude = null;
+                let longitude = null;
+                const checkLocationButton = document.getElementById("check-location");
+                const locationAlertContainer = document.getElementById("location-alert-container");
+                const jalanInput = document.getElementById("jalan");
+                const productProcessButtonAfter = document.getElementById("product-process-button-after");
+
+                geocoder.on("result", function(event){
+                    latitude = event.result.geometry.coordinates[1];
+                    longitude = event.result.geometry.coordinates[0];
+                });
+
+                checkLocationButton.addEventListener("click", function(event){
+                        event.stopImmediatePropagation();
+                        if((latitude && longitude !== null) && (jalanInput.value !== "")){
+                            locationAlertContainer.innerHTML = null;
+                            checkLocationButton.innerHTML += `...`
+                            checkLocation(latitude, longitude).then(response => {
+                                checkLocationButton.innerHTML = "Cek Lokasi";
+                                if(response.msg == "Success"){
+                                    productProcessButtonAfter.innerHTML = `<button type="submit" class="btn btn-success btn-block mt-3" id="product-process-button">Beli Menu</button>`;
+                                }
+                                else {
+                                    productProcessButtonAfter.innerHTML = `<button type="submit" class="btn btn-danger btn-block mt-3" id="product-process-button" disabled>Jarak Terlalu Jauh, Menu Tidak Bisa Dibeli</button>`
+                                }
+                            });
+                        }
+                        else {
+                            productProcessButtonAfter.innerHTML = null;
+                            locationAlertContainer.innerHTML  = `<div class="alert alert-danger">Silahkan masukan alamat dan nama jalan !</div>`
+                        }
+                    });
+
+                    const productProcessButton = document.getElementById("product-process-button");
+                    const modalCenter = document.getElementById("exampleModalCenter");
+                    productProcessButton.addEventListener("click", function(){
+                        if(CUSTOMER_TOKEN == null){
+                            location.href = "./customer/login.html";
+                            sessionStorage.setItem("message", "Harap login terlebih dahulu");
+                        }
+                        else {
+                            dbGetCustomerLocation().then(data => {
+                                if(data != null){
+                                    $('#changeLocationModal').modal('show');
+                                }
+                            })
+                            .catch(error => {
+                                if(error){
+                                    $('#exampleModalCenter').modal('show');
+                                }
+                            });
+                        }
+                    });
+
+                    const changeCurrentLocationButton = document.getElementById("yes-change-current");
+                                changeCurrentLocationButton.addEventListener("click", function(event){
+                                    $('#changeLocationModal').modal('hide')
+                                    $('#exampleModalCenter').modal('show');
+                                });
+
+                                const useCurrentLocationButton = document.getElementById("no-use-current");
+                                useCurrentLocationButton.addEventListener("click", function(event){
+                                    const data = {
+                                        productId: idParam,
+                                        path: document.getElementById("product-image").src,
+                                        productName: document.getElementById("current-product").innerHTML,
+                                        productPrice: document.getElementById("product-price").innerHTML
+                                    };
+                                    dbInsertProductToCart(data).then(response => location.href = "./index.html#cart")
+                                });
+
+
+                    productProcessButtonAfter.addEventListener("click", function(event){
+                        const dataLocation = {
+                                        id: 1,
+                                        latitude: latitude,
+                                        longitude: longitude,
+                                        address: jalanInput.value
+                                    };
+                        const data = {
+                            productId: idParam,
+                            path: document.getElementById("product-image").src,
+                            productName: document.getElementById("current-product").innerHTML,
+                            productPrice: document.getElementById("product-price").innerHTML
+                        };
+                    
+                        dbInsertCustomerLocation(dataLocation).then(() => {
+                            dbInsertProductToCart(data).then(response => location.href = "./index.html#cart")
+                        });
+                        
+                    });
+                    }
+                });
+    </script>
+</body>
+</html>

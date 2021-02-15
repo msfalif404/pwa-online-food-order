@@ -1,0 +1,49 @@
+<nav class="sidebar d-flex flex-column h-100">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link text-primary" href="./dashboard.html">Dashboards</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-secondary" href="#product-orders" id="product-orders">Product Orders</a>
+        </li>
+        <li class="nav-item" data-toggle="collapse" href="#product-collapse">
+            <div class="d-flex">
+                <a class="nav-link text-muted" href="#all-products">Products</a>
+                <span class="ml-auto">&darr;</span>
+            </div>
+
+            <div class="collapse" id="product-collapse">
+                <ul class="nav flex-column ml-4 pl-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#all-products" id="all-products">All Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#add-product" id="add-product">Add Products</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" data-toggle="collapse" href="#employee-collapse">
+          <div class="d-flex">
+            <a class="nav-link text-muted" href="#all-employee">Employees</a>
+            <span class="ml-auto">&darr;</span>
+          </div>
+
+          <div class="collapse" id="employee-collapse">
+            <ul class="nav flex-column ml-4 pl-1">
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#all-employee" id="all-employee">All Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#add-employee" id="add-employee">Add Employee</a>
+                </li>
+            </ul>
+        </div>
+        </li>
+    </ul>
+    <ul class="nav flex-column h-100 justify-content-end">
+        <li class="nav-item">
+            <a class="btn btn-block btn-danger" href="#" id="logout-button"><i data-feather="power"></i> Logout</a>
+        </li>
+    </ul>
+</nav>

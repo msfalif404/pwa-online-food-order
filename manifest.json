@@ -1,0 +1,21 @@
+{
+  "name": "Jajan Yuk",
+  "short_name": "Jajan Yuk",
+  "description": "Easily Order Food From Yours Phone",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "start_url": "./landing-mobile.html",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Akun | Jajan Yuk</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../images/chicken.svg" type="image/x-icon">
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Swiper.js -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- User Defined Styles -->
+    <!-- Manifest.json -->
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        a.text-orange:hover, a:active {
+            color: #fda766;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        @media screen and (min-width:992px){
+            #product-recommendation {
+                margin-top: 7rem !important;
+            }
+            .modal-lg {
+                width: 693px;
+            }
+            .modal-content {
+                position: absolute;
+                top: 40px;
+                right: 56px;
+                border-radius: 0;
+            }
+        }
+        @media screen and (max-width:992px){
+            #product-recommendation {
+                margin-top: 4rem !important;
+            }
+            .modal-content {
+                top: 70px;
+                right: 0;
+            }
+        }
+        .list-group-item {
+            transition-duration: 175ms;
+        }
+        .list-group-item:hover {
+            background: #efefef;
+            cursor: pointer;
+        }
+        .hovered:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top" id="navbar" style="z-index: 9999;">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand font-weight-bold d-none d-lg-block">JAJAN YUK</a>
+            <form action="#" class="mx-auto w-100 d-lg-none">
+                <div class="input-group">
+                    <input type="text" name="jajanan" id="jajanan" class="form-control border-0 menu-search" placeholder="Cari Jajanan Yuk..." data-toggle="modal" data-target="#modal-small" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="cari_jajanan"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="collapse navbar-collapse">
+                <form action="#" class="mx-auto w-75">
+                    <div class="input-group">
+                        <input type="text" name="jajanan" id="jajanan" class="form-control menu-search" placeholder="Cari Jajanan Yuk..." data-toggle="modal" data-target="#modal-large" autocomplete="off">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="cari_jajanan"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="my-2" id="customer-auth-nav">
+                    <a href="./customer/login.html" class="btn bg-white border-primary">Masuk</a>
+                    <a href="./customer/register.html" class="btn btn-primary">Daftar</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Account Detail -->
+    <section class="bg-white mt-5 mb-5 my-lg-4 py-4">
+    </section>
+
+    <!-- Footer On Dekstop -->
+    <footer id="footer" class="bg-dark text-light d-none d-lg-block text-white py-4 ">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-4 text-md-left">
+                    <h4>Jajan Yuk</h4>
+                    <p>Temukan berbagai macam pilihan makanan menarik yang siap diantarkan sampai ke rumah anda</p>
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h4>Tentang</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Tentang Kami</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Privacy Policy</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">Terms Of Service</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <h4>Berlangganan Sekarang</h4>
+                    <p>Mulai berlangganan sekarang untuk mendapatkan promo terbaik dari kami !</p>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Masukan Email Anda">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" type="button">Okay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="w-100 bg-white">
+            <div class="row">
+                <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                    <div>
+                        <p>&copy; 2021 - 2022 Jajan Yuk</p>
+                    </div>
+                    <div>
+                        <i class='bx bxl-facebook-circle bx-sm hovered-icon'></i>
+                        <i class='bx bxl-instagram-alt bx-sm hovered-icon'></i>
+                        <i class='bx bxl-twitter bx-sm hovered-icon'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation Bar On Mobile -->
+    <nav class="bg-white border-top fixed-bottom d-lg-none d-flex justify-content-center align-items-center w-100 py-2">
+        <a href="index.html" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-orange small">
+            <i class="fas fa-home text-small"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+        </a>
+        <a href="#" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+        <a href="#" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-secondary small">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+    
+    <!-- Bootstrap -->
+    <script src="../js/jquery-3.5.1.slim.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="module">
+        import {getProductOrderAPI} from "../js/services/api/customer/product-order.js";
+        const CUSTOMER_TOKEN = JSON.parse(localStorage.getItem("CUSTOMER_TOKEN")) ?? null;
+        if(CUSTOMER_TOKEN == null){
+           location.href = "../index.html";
+        }
+        else {
+            const CUSTOMER_TOKEN = JSON.parse(localStorage.getItem("CUSTOMER_TOKEN"));
+            const {data: {access_token, refresh_token, customer: {name}}} = CUSTOMER_TOKEN;
+            const navbar = document.getElementById("navbar");
+            navbar.classList.remove("py-3");
+            const customerAuthNavLink = document.querySelectorAll("#customer-auth-nav a");
+            customerAuthNavLink.forEach(element => {
+                element.style.display = "none";
+            });
+            const customerAuthNavContainer = document.getElementById("customer-auth-nav");
+            customerAuthNavContainer.innerHTML = `<a class="text-dark" href="../cart.html"><i class='bx bxs-cart bx-sm mr-4 hovered-icon'></i></a>
+                                                    <a class="text-dark" href="./account-detail.html"><i class='bx bx-user bx-sm hovered-icon'></i></a>`;
+
+            const customerNameContainer = document.getElementById("customer-name");
+            customerNameContainer.innerHTML += name;
+
+            const alertContainer = document.getElementById("alert-container");
+            if(sessionStorage.getItem("message")){
+                alertContainer.innerHTML = sessionStorage.getItem("message");
+                alertContainer.classList.add("alert","alert-success","alert-dismissible","fade","show");
+                sessionStorage.removeItem("message");
+            }
+            getProductOrderAPI(access_token).then(response => {
+                if(response.msg == "Token has been revoked"){
+                    localStorage.removeItem("CUSTOMER_TOKEN");
+                    location.href = "../index.html";
+                }
+                if(response.msg == "Success"){
+                    const {data} = response;
+                    const transactionContainer = document.getElementById("transaction-container");
+                    const pendingData = data.filter(element => {return element.status == "pending"});
+                    const onProcessData = data.filter(element => {return element.status == "diproses"});
+                    const onDeliveryData = data.filter(element => {return element.status == "dikirim"});
+                    const acceptedData = data.filter(element => {return element.status == "diterima"});
+                    const canceledData = data.filter(element => {return element.status == "dibatalkan"});
+                    
+                    transactionContainer.innerHTML = `<div class="col-6 col-lg-2">
+                                <a href="order-details.html?status=pending" class="text-dark hovered" id="pending-link">
+                                    <i class="fas fa-boxes fa-2x mb-2"></i>
+                                    <span class="badge badge-primary cart-counter" id="pending-counter">0</span>
+                                    <p>Pending</p>
+                                </a>
+                            </div>
+                            <div class="col-6 col-lg-2">
+                                <a href="order-details.html?status=diproses" class="text-dark hovered" id="processed-link">
+                                    <i class="fas fa-truck-loading fa-2x mb-2"></i>
+                                    <span class="badge badge-primary cart-counter" id="processed-counter">0</span>
+                                    <p>Diproses</p>
+                                </a>
+                            </div>
+                            <div class="col-6 col-lg-2">
+                                <a href="order-details.html?status=dikirim" class="text-dark hovered" id="ondelivery-link">
+                                    <i class="fas fa-truck fa-2x mb-2"></i>
+                                    <span class="badge badge-primary cart-counter" id="ondelivery-counter">0</span>
+                                    <p>Dikirim</p>
+                                </a>
+                            </div>
+                            <div class="col-6 col-lg-2">
+                                <a href="order-details.html?status=diterima" class="text-dark hovered" id="accepted-link">
+                                    <i class="fas fa-check-square fa-2x mb-2"></i>
+                                    <span class="badge badge-primary cart-counter" id="accepted-counter">0</span>
+                                    <p>Diterima</p>
+                                </a>
+                            </div>
+                            <div class="col-12 col-lg-2">
+                                <a href="order-details.html?status=dibatalkan" class="text-dark hovered" id="canceled-link">
+                                    <i class="fas fa-window-close fa-2x mb-2"></i>
+                                    <span class="badge badge-primary cart-counter" id="canceled-counter">0</span>
+                                    <p>Dibatalkan</p>   
+                                </a>
+                            </div>`;
+
+                    document.getElementById("pending-counter").innerHTML = pendingData.length;
+                    document.getElementById("processed-counter").innerHTML = onProcessData.length;
+                    document.getElementById("ondelivery-counter").innerHTML = onDeliveryData.length;
+                    document.getElementById("accepted-counter").innerHTML = acceptedData.length;
+                    document.getElementById("canceled-counter").innerHTML = canceledData.length;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

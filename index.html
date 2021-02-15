@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jajan Yuk</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./images/chicken.svg" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- Swiper.js -->
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+    <!-- Mapbox -->
+    <script src="./js/mapbox-gl.js"></script>
+    <link href="./css/mapbox-gl.css" rel="stylesheet" />
+    <!-- Boxicon -->
+    <link href='./css/boxicons.min.css' rel='stylesheet'>
+    <!-- Manifest.json -->
+    <link rel="manifest" href="./manifest.json">
+    <!-- User Defined Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+    <script src="./js/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="./css/mapbox-gl-geocoder.css" type="text/css" />
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top" id="navbar" style="z-index: 9999;">
+    </nav>
+
+    <!-- Product Recommendation -->
+    <section class="bg-white mt-0 mb-5 py-4 shadow-sm" id="product-recommendation">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary"></div>
+        </div>
+    </section>
+    
+
+    <!-- Footer On Dekstop -->
+    <footer id="footer" class="bg-dark text-light d-none d-lg-block text-white py-4 ">
+    </footer>
+
+    <!-- Bottom Navigation Bar On Mobile -->
+    <nav id="bottom-navbar-container" class="bg-white border-top fixed-bottom d-lg-none d-flex justify-content-center align-items-center w-100 py-2">  
+    </nav>
+
+    <!-- Modal Large -->
+    <div class="modal fade" id="modal-large" tabindex="-1" style="z-index: 99999;" data-focus="false">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="list-group list-group-flush overflow-auto search-suggest search-suggest>
+                    <li class="list-group-item">Silahkan cari menu...</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Small -->
+    <div class="modal fade" id="modal-small" tabindex="-1" style="z-index: 99999;" data-focus="false">
+        <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="list-group list-group-flush overflow-auto search-suggest">
+                    <li class="list-group-item">Silahkan cari menu...</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Ask Change Location Modal -->
+    <div class="modal fade" id="changeLocationModal" tabindex="-1" role="dialog" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Apakah anda ingin mengganti lokasi ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body d-flex justify-content-center align-items-center">
+                <a href="#" class="btn btn-secondary mr-auto" id="no-use-current">Tidak, gunakan lokasi yang sudah ada</a>
+                <a href="#" class="btn btn-primary" id="yes-change-current">Ganti Lokasi</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal center -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Silahkan Cari Lokasi Anda Terlebih Dahulu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="position: relative;height:300px;">
+                <div id="map" style="position: static;width: inherit;height: inherit;"></div>
+            </div>
+            <div class="modal-footer d-block">
+                <div class="" id="location-alert-container"></div>
+                <div class="border">
+                    <input type="text" name="jalan" id="jalan" class="form-control py-4 border-0" placeholder="Nama Jalan... Contoh (Jl. Masjid Nurul Yaqin)" required>
+                </div>
+                <button class="btn btn-primary btn-block" id="check-location">Cek Lokasi</button>
+                <div class="" id="product-process-button"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Cancel Order Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Ingin Membatalkan Pesanan Anda ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="" id="reason-alert-container"></div>
+              <textarea name="cancel-reason" id="cancel-reason-input" cols="30" rows="10" class="form-control" placeholder="Alasan anda ingin membatalkan pesanan ini..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-danger btn-block" id="cancel-order-button-api">Batalkan Pesanan</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap -->
+    <script src="./js/jquery-3.5.1.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    <!-- Idb -->
+    <script src="./js/idb.js"></script>
+    <script src="./js/db.js"></script>
+    <!-- User Define Scripts -->
+    <script src="./js/helpers/spa-customer-helper.js" type="module"></script>
+    <script>
+        if("serviceWorker" in navigator){
+            window.addEventListener("load", function(){
+                navigator.serviceWorker.register("./service-worker.js")
+                    .then(function(){
+                        console.log("Pendaftaran service worker berhasil");
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
