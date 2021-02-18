@@ -180,7 +180,6 @@ if(CUSTOMER_TOKEN != null){
                         const productRecommendationApi = document.getElementById("product-recommendation-api");
                         productRecommendationApi.innerHTML = `<div class="d-flex justify-content-center"><div class="spinner-border text-primary"></div></div>`;
                         getAllProductIndex(access_token).then(response => {
-                            console.log(response);
                             if(response.msg == "Token has been revoked"){
                                 localStorage.removeItem("CUSTOMER_TOKEN");
                                 access_token = "";
@@ -381,7 +380,6 @@ if(CUSTOMER_TOKEN != null){
                                 longitude: longitude,
                                 address: jalanInput.value
                             };
-                            console.log(data);
                             dbInsertCustomerLocation(data).then(() => {
                                 location.href = "./index.html#cart";
                                 location.reload();
@@ -564,7 +562,7 @@ if(CUSTOMER_TOKEN != null){
                                                                 <p class="text-muted">Subtotal ${menu}</p>
                                                                 <input type="number" class="form-control form-control-sm mr-2 quantity" name="quantity" id="quantity" placeholder="Jumlah" min="1" value="${jumlah}">
                                                                 <p class="mr-2">Rp. ${subtotal.toLocaleString("ID-id")}</p>
-                                                                <i class="fas fa-times hovered delete-product" data-product-id=${menuID}></i>
+                                                                <i class='bx bx-x bx-sm hovered delete-product' data-product-id=${menuID}></i>
                                                             </div>`;
                                     });
                                     orderCardBodySummary.innerHTML = orderSummaryRaw;
@@ -858,7 +856,6 @@ if(CUSTOMER_TOKEN != null){
                             else if(response.msg == "Success"){
                                 const {data} = response;
                                 const statusData = data.filter(element => {return element.status == status});
-                                console.log(statusData);
                                 let dataStatusRaw = "";
                                 if(statusData.length == 0){
                                     dataStatusRaw += `<p>Tidak ada produk dengan status ${status}</p>`;
@@ -903,6 +900,13 @@ if(CUSTOMER_TOKEN != null){
                                         });
                                     });
                                 }
+
+                                const orderDetailsBack = document.getElementById("order-details-back");
+                                orderDetailsBack.addEventListener("click", function(event){
+                                    event.preventDefault();
+                                    page = "account-detail";
+                                    loadPageContent(page);
+                                });
                             }
                         });
                     }
@@ -952,10 +956,10 @@ if(CUSTOMER_TOKEN != null){
                             else if(response.msg == "Success"){
                                 const {data} = response;
                                 const dataFilteredCodeOrder = data.filter(element => {return element.codeOrder == status});
+                                let dataTableRaw = "";
                                 let dataStatusRaw = "";
                                     dataFilteredCodeOrder.forEach(element => {
-                                        const {codeOrder, dateOrder, status, finalPrice, kurir: {name}, confirmation, details} = element;
-                                        console.log(element);
+                                        const {address, codeOrder, dateOrder, status, fee, finalPrice, kasir: {name: cashierName}, kurir: {name: courrierName}, confirmation, details, distance} = element;
                                         let date = new Date(dateOrder);
                                         let UTCTime = date.toLocaleTimeString("id-ID");
                                         let UTCDate = date.toLocaleDateString('id-ID', {timeZone: "UTC"});
@@ -992,31 +996,34 @@ if(CUSTOMER_TOKEN != null){
                                                 });
                                             });
                                         }
+                                        dataStatusRaw += `
+                                        <div class="d-flex flex-column mt-2">
+                                            <p class="text-secondary ml-2">Kode Pemesanan: <span class="text-dark">${codeOrder}</span></p>
+                                            <p class="text-secondary ml-2">Kode Konfirmasi: <span class="text-dark">${confirmation == null ? "Belum didapatkan" : confirmation}</span></p>
+                                            <p class="text-secondary ml-2">Tanggal Pemesanan: <span class="text-dark">${fullUTC}</span></p>
+                                            <p class="text-secondary ml-2">Status Pemesanan: <span class="text-dark">${status}</span></p>
+                                            <p class="text-secondary ml-2">Alamat Pemsanan: <span class="text-dark">${address}</span></p>
+                                            <p class="text-secondary ml-2">Jarak Pemesanan: <span class="text-dark">${distance} km.</span></p>
+                                            <p class="text-secondary ml-2">Nama Kasir: <span class="text-dark">${cashierName == null ? "Belum didapatkan" : cashierName}</span></p>
+                                            <p class="text-secondary ml-2">Nama Kurir: <span class="text-dark">${courrierName == null ? "Belum didapatkan" : courrierName}</span></p>
+                                            <p class="text-secondary ml-2">Pajak: Rp. <span class="text-dark">${fee}</span></p>
+                                            <p class="text-secondary ml-2">Total Harga: Rp. <span class="text-dark">${finalPrice.toLocaleString("ID-id")}</span></p>
+                                        </div>`;
                                             details.forEach(element => {
-                                                const {ID, Name, Path, SubTotal} = element;
-                                                dataStatusRaw += `<div class="card-body bg-white">
-                                                <div class="card">
-                                                    <div class="card-header">Data Pesanan</div>
-                                                    <div class="card-body d-flex flex-column">
-                                                        <div class="mb-3"><h5>${Name}</h5></div>
-                                                        <div class="d-flex mb-3">
-                                                            <img src="./images/pizza_about_page.jpg" style="width:200px;" />
-                                                            <div class="d-flex flex-column mb-3">
-                                                            <p class="text-secondary ml-2">Kode Pemesanan: <span class="text-dark">${codeOrder}</span></p>
-                                                            <p class="text-secondary ml-2">Kode Konfirmasi: <span class="text-dark">${confirmation == null ? "Belum didapatkan" : confirmation}</span></p>
-                                                            <p class="text-secondary ml-2">Tanggal Pemesanan: <span class="text-dark">${fullUTC}</span></p>
-                                                            <p class="text-secondary ml-2">Status Pemesanan: <span class="text-dark">${status}</span></p>
-                                                            <p class="text-secondary ml-2">Subtotal: Rp. <span class="text-dark">${SubTotal.toLocaleString("ID-id")}</span></p>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="btn btn-primary btn-block order-details-data-button" data-details=${ID} data-coder=${codeOrder}>Detail Pemesanan</a>
-                                                    </div>
-                                                </div>
-                                            </div>`;
+                                                const {ID, Amount, Name, SubTotal} = element;
+                                                dataTableRaw += `<tr>
+                                                                    <td>${Name}</td>
+                                                                    <td>${Amount}</td>
+                                                                    <td>${SubTotal}</td>
+                                                                    <td><a href="#" class="btn btn-primary order-details-data-button" data-details=${ID} data-coder=${codeOrder}>Review Pesanan</a></td>
+                                                                </tr>`;
                                             });
                                     });
                                     const orderDetailsCodeOrderContainer = document.getElementById("order-details-code-order-container");
                                     orderDetailsCodeOrderContainer.innerHTML = dataStatusRaw;
+
+                                    const productContainer = document.getElementById("product-container");
+                                    productContainer.innerHTML = dataTableRaw;
 
                                     const orderDetailsDataButton = document.querySelectorAll(".order-details-data-button");
                                     orderDetailsDataButton.forEach(element => {
@@ -1025,6 +1032,13 @@ if(CUSTOMER_TOKEN != null){
                                             loadPageContent(page, event.target.getAttribute("data-coder"), event.target.getAttribute("data-details"));
                                         });
                                     });
+
+                                    const orderDetailsBack = document.getElementById("order-details-back");
+                                    orderDetailsBack.addEventListener("click", function(event){
+                                        event.preventDefault();
+                                        page = "account-detail";
+                                        loadPageContent(page);
+                                    })
                             }
                         });
                     }
@@ -1094,7 +1108,6 @@ if(CUSTOMER_TOKEN != null){
                                 });
                                 let dataStatusRaw = "";
                                 if(statusOrderData == "diterima"){
-                                    console.log(dataDetailsArray);
                                     dataDetailsArray.forEach(element => {
                                             const {Amount, CodeOrder, ID, Name, Path, SubTotal} = element;
                                             menuData = ID;
@@ -1150,6 +1163,7 @@ if(CUSTOMER_TOKEN != null){
                                                         <p class="text-secondary ml-2">Total Harga: Rp. <span class="text-dark">${finalPriceData.toLocaleString("ID-id")}</span></p>
                                                         </div>
                                                     </div>
+                                                    <p>Produk belum bisa direview...</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1189,6 +1203,13 @@ if(CUSTOMER_TOKEN != null){
                                     });
                                 }
                             }
+
+                            const orderDetailsBack = document.getElementById("order-details-back");
+                                    orderDetailsBack.addEventListener("click", function(event){
+                                        event.preventDefault();
+                                        page = "account-detail";
+                                        loadPageContent(page);
+                                    })
                         });
                     }
                     else if(page == "edit-profile"){
