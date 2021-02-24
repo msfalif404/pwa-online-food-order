@@ -1338,10 +1338,10 @@ if(CUSTOMER_TOKEN != null){
                                 const monthsInput = document.getElementById("months");
                                 const yearsInput = document.getElementById("years");
 
-                                const {phone, email, gender, birthday} = response.data[0];
+                                const {name, phone, email, gender, birthday} = response.data[0];
                                 const convertedDate = new Date(birthday);
-                                customerNameContainer.innerHTML += response.data[0].name;
-                                nameInput.value = response.data[0].name;
+                                customerNameContainer.innerHTML = `Halo, selamat data ${name}`;
+                                nameInput.value = name;
                                 phoneInput.value = phone;
                                 emailInput.value = email;
                                 daysInput.value = convertedDate.getDate();
@@ -1355,7 +1355,6 @@ if(CUSTOMER_TOKEN != null){
                                     const genderInput = document.getElementById("male").checked ? document.getElementById("male").value : document.getElementById("female").checked ? document.getElementById("female").value : null;
                                     const birthdayInput = `${yearsInput.value}-${monthsInput.value}-${daysInput.value}`;
                                     changeProfileCustomerAPI(CUSTOMER_TOKEN.data.customer.id, nameInput.value, genderInput, birthdayInput, access_token).then(response => {
-                                        console.log(response);
                                         if(response.msg == "Token has been revoked"){
                                             localStorage.removeItem("CUSTOMER_TOKEN");
                                             access_token = "";
