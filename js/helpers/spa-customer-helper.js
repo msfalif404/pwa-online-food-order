@@ -1348,14 +1348,14 @@ if(CUSTOMER_TOKEN != null){
                                 monthsInput.value = convertedDate.getMonth() + 1;
                                 yearsInput.value = convertedDate.getFullYear();
                                 gender == "L" ?  document.getElementById("male").setAttribute("checked","checked") : document.getElementById("female").setAttribute("checked","checked");
-
                                 const editProfileForm = document.getElementById("edit-profile");
                                 editProfileForm.addEventListener("submit", function(event){
                                     event.preventDefault();
                                     editProfileForm[8].value = "Diproses...";
                                     const genderInput = document.getElementById("male").checked ? document.getElementById("male").value : document.getElementById("female").checked ? document.getElementById("female").value : null;
                                     const birthdayInput = `${yearsInput.value}-${monthsInput.value}-${daysInput.value}`;
-                                    changeProfileCustomerAPI(id, nameInput.value, genderInput, birthdayInput, access_token).then(response => {
+                                    changeProfileCustomerAPI(CUSTOMER_TOKEN.data.customer.id, nameInput.value, genderInput, birthdayInput, access_token).then(response => {
+                                        console.log(response);
                                         if(response.msg == "Token has been revoked"){
                                             localStorage.removeItem("CUSTOMER_TOKEN");
                                             access_token = "";
