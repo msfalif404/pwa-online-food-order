@@ -529,10 +529,11 @@ if(CUSTOMER_TOKEN != null){
                             }
                         }).catch(error => {
                             if(error){
-                                sessionStorage.setItem("message", "Silahkan Masukan Lokasi Anda Terlebih Dahalu Melalui Tombol Beli Menu di Bagian Atas !");
+                                sessionStorage.setItem("message", "Silahkan Masukan Lokasi Anda Terlebih Dahalu !");
                                 page = "all-products";
                                 document.getElementById("beli-menu").classList.remove("d-none");
-                                loadPageContent(page);  
+                                loadPageContent(page);
+                                $('#exampleModalCenter').modal('show')
                             }
                         });
                         function getAllProductsIDB(){
@@ -604,50 +605,56 @@ if(CUSTOMER_TOKEN != null){
                 
                                     const productProcessBuyButton = document.getElementById("product-process-buy");
                                     productProcessBuyButton.addEventListener("click", function(event){
-                                        productProcessBuyButton.innerHTML = "Diproses...";
-                                        const productNote = document.getElementById("product-note").value ?? null;
-                                        const productFee = document.getElementById("fee").innerHTML.slice(4).replace(".","");
-                                        const productFinalPirce = document.getElementById("product-final-price").innerHTML.slice(4).replace(".","");
-                
-                                        productOrderAPI(latitudeList, longitudeList, addressList, productNote, productFee, productFinalPirce, orderList, access_token)
-                                        .then(response => {
-                                            if(response.msg == "Token has been revoked"){
-                                                localStorage.removeItem("CUSTOMER_TOKEN");
-                                                access_token = "";
-                                                name = "";
-                                                id = "";
-                                                sessionStorage.setItem("message", "Harap login terlebih dahulu");
-                                                location.href = "./customer/login.html";
-                                            }
-                                            else if(response.msg =="token expired"){
-                                                    refreshTokenAPI(access_token)
-                                                        .then(response => {
-                                                            if(response.msg == "token expired"){
-                                                                localStorage.removeItem("CUSTOMER_TOKEN");
-                                                                access_token = "";
-                                                                name = "";
-                                                                id = "";
-                                                                sessionStorage.setItem("message", "Waktu anda telah habis, harap masuk kembali");
-                                                                location.href = "./customer/login.html";
-                                                            }
-                                                            else {
-                                                                localStorage.setItem("CUSTOMER_TOKEN", JSON.stringify(response));
-                                                                location.reload();
-                                                            }
-                                                        });
-                                            }
-                                            else if(response.msg == "Jarak Terlalu Jauh"){
-                                                sessionStorage.setItem("message", "Silahkan Masukan Lokasi Anda Terlebih Dahalu Melalui Tombol Beli Menu di Bagian Atas !");
-                                                location.href = "./index.html";
-                                            }
-                                            else if(response.msg == "Success"){
-                                                dbDeleteAllProduct().then(() => {
-                                                    sessionStorage.setItem("message", "Produk berhasil dibeli, silahkan tunggu hingga produk dikirimkan dan konfirmasikan kode pesanan kepada kurir (kode pesanan bisa didapat apabila produk sedang dikirim dan bisa diketahui lewat menu Dikirim yang terletak di bawah ini)");
-                                                    page = "account-detail";
-                                                    loadNavBarContent();
-                                                    loadPageContent(page);
-                                                });
-                                            }
+                                        $('#confirmModal').modal('show')
+                                        const confirmProcessButtonModal = document.getElementById("confirmProcessButtonModal");
+                                        confirmProcessButtonModal.addEventListener("click", function(event){
+                                            event.preventDefault();
+                                            confirmProcessButtonModal.innerHTML = "Diproses...";
+                                            const productNote = document.getElementById("product-note").value ?? null;
+                                            const productFee = document.getElementById("fee").innerHTML.slice(4).replace(".","");
+                                            const productFinalPirce = document.getElementById("product-final-price").innerHTML.slice(4).replace(".","");
+                    
+                                            productOrderAPI(latitudeList, longitudeList, addressList, productNote, productFee, productFinalPirce, orderList, access_token)
+                                            .then(response => {
+                                                $('#confirmModal').modal('hide')
+                                                if(response.msg == "Token has been revoked"){
+                                                    localStorage.removeItem("CUSTOMER_TOKEN");
+                                                    access_token = "";
+                                                    name = "";
+                                                    id = "";
+                                                    sessionStorage.setItem("message", "Harap login terlebih dahulu");
+                                                    location.href = "./customer/login.html";
+                                                }
+                                                else if(response.msg =="token expired"){
+                                                        refreshTokenAPI(access_token)
+                                                            .then(response => {
+                                                                if(response.msg == "token expired"){
+                                                                    localStorage.removeItem("CUSTOMER_TOKEN");
+                                                                    access_token = "";
+                                                                    name = "";
+                                                                    id = "";
+                                                                    sessionStorage.setItem("message", "Waktu anda telah habis, harap masuk kembali");
+                                                                    location.href = "./customer/login.html";
+                                                                }
+                                                                else {
+                                                                    localStorage.setItem("CUSTOMER_TOKEN", JSON.stringify(response));
+                                                                    location.reload();
+                                                                }
+                                                            });
+                                                }
+                                                else if(response.msg == "Jarak Terlalu Jauh"){
+                                                    sessionStorage.setItem("message", "Silahkan Masukan Lokasi Anda Terlebih Dahalu Melalui Tombol Beli Menu di Bagian Atas !");
+                                                    location.href = "./index.html";
+                                                }
+                                                else if(response.msg == "Success"){
+                                                    dbDeleteAllProduct().then(() => {
+                                                        sessionStorage.setItem("message", "Produk berhasil dibeli, silahkan tunggu hingga produk dikirimkan dan konfirmasikan kode pesanan kepada kurir (kode pesanan bisa didapat apabila produk sedang dikirim dan bisa diketahui lewat menu Dikirim yang terletak di bawah ini)");
+                                                        page = "account-detail";
+                                                        loadNavBarContent();
+                                                        loadPageContent(page);
+                                                    });
+                                                }
+                                            });
                                         });
                                     });
                 

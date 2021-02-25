@@ -101,6 +101,6 @@ workbox.routing.registerRoute(
   })
 );
 
-// workbox.setConfig({
-//   debug: true
-// });
+workbox.setConfig({
+  debug: false
+});
