@@ -37,6 +37,51 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+=======
+    <!-- Cancel Order Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Ingin Membatalkan Pesanan Anda ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="" id="reason-alert-container"></div>
+              <textarea name="cancel-reason" id="cancel-reason-input" cols="30" rows="10" class="form-control" placeholder="Alasan anda ingin membatalkan pesanan ini..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-danger btn-block" id="cancel-order-button-api">Batalkan Pesanan</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Confirm Order Modal -->
+    <div class="modal" id="confirmModal" tabindex="-1" style="z-index: 99999;"  aria-hidden="true" data-focus="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Anda Yakin Ingin Memproses Produk Yang Anda Beli ?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Anda masih bisa membatalkannya nanti.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="confirmProcessButtonModal">Proses</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+>>>>>>> 6b49df51cb2ecc5c559c26837287042bbc24eebb
     <!-- Bootstrap -->
     <script src="./js/jquery-3.5.1.slim.min.js"></script>
     <script src="./js/popper.min.js"></script>
@@ -45,6 +90,7 @@
     <script type="module">
         import {loginEmployeeAPI} from "./js/services/api/employee/auth-employee.js";
 
+<<<<<<< HEAD
         const alertContainer = document.getElementById("alert-container");
         const EMPLOYEE_TOKEN = JSON.parse(localStorage.getItem("EMPLOYEE_TOKEN")) ?? null;
         if(EMPLOYEE_TOKEN != null){
@@ -86,6 +132,19 @@
                                 }
                             }
                         }
+=======
+    <!-- Idb -->
+    <script src="./js/idb.js"></script>
+    <script src="./js/db.js"></script>
+    <!-- User Define Scripts -->
+    <script src="./js/helpers/spa-customer-helper.js" type="module"></script>
+    <script>
+        if("serviceWorker" in navigator){
+            window.addEventListener("load", function(){
+                navigator.serviceWorker.register("./service-worker.js")
+                    .then(function(){
+                        console.log("Happy Eat :)");
+>>>>>>> 6b49df51cb2ecc5c559c26837287042bbc24eebb
                     });
             });
         }
