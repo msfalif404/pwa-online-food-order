@@ -6,7 +6,7 @@ import {isTokenExpired} from "./token-expired-helper.js";
 import {isTokenNull} from "./token-null-helper.js";
 
 const EMPLOYEE_TOKEN = JSON.parse(localStorage.getItem("EMPLOYEE_TOKEN")) ?? null;
-isTokenNull(EMPLOYEE_TOKEN, '../login.html');
+isTokenNull(EMPLOYEE_TOKEN, '../index.html');
 if(EMPLOYEE_TOKEN != null){
     const {access_token} = EMPLOYEE_TOKEN;
 
@@ -89,7 +89,7 @@ if(EMPLOYEE_TOKEN != null){
                         logoutATAPI(access_token).then(response => {
                             if(response.msg == "Successfully logged out"){
                                 localStorage.removeItem("EMPLOYEE_TOKEN");
-                                location.href = "../login.html";
+                                location.href = "../index.html";
                             }
                         });
                     });
@@ -179,11 +179,11 @@ if(EMPLOYEE_TOKEN != null){
                             .then(response => {
                                 if(response.msg =="token expired"){
                                     refreshTokenAPI(access_token)
-                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../login.html"));
+                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../index.html"));
                                 }
                                 if(response.msg == "Token has been revoked"){
                                     localStorage.removeItem("EMPLOYEE_TOKEN");
-                                    location.href = "../login.html";
+                                    location.href = "../index.html";
                                 }
                                 if(sessionStorage.getItem("message")){
                                     const alertContainer = document.getElementById("alert-container");
@@ -199,7 +199,7 @@ if(EMPLOYEE_TOKEN != null){
                                 logoutATAPI(access_token).then(response => {
                                     if(response.msg == "Successfully logged out"){
                                         localStorage.removeItem("EMPLOYEE_TOKEN");
-                                        location.href = "../login.html";
+                                        location.href = "../index.html";
                                     }
                                 });
                             });
@@ -210,11 +210,11 @@ if(EMPLOYEE_TOKEN != null){
                             .then(response => {
                                 if(response.msg =="token expired"){
                                     refreshTokenAPI(access_token)
-                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../login.html"));
+                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../index.html"));
                                 }
                                 if(response.msg == "Token has been revoked"){
                                     localStorage.removeItem("EMPLOYEE_TOKEN");
-                                    location.href = "../login.html";
+                                    location.href = "../index.html";
                                 }
                                 if(sessionStorage.getItem("message")){
                                     const alertContainer = document.getElementById("alert-container");
@@ -234,7 +234,7 @@ if(EMPLOYEE_TOKEN != null){
                                 logoutATAPI(access_token).then(response => {
                                     if(response.msg == "Successfully logged out"){
                                         localStorage.removeItem("EMPLOYEE_TOKEN");
-                                        location.href = "../login.html";
+                                        location.href = "../index.html";
                                     }
                                 });
                             });
@@ -245,11 +245,11 @@ if(EMPLOYEE_TOKEN != null){
                             .then(response => {
                                 if(response.msg =="token expired"){
                                     refreshTokenAPI(access_token)
-                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../login.html"));
+                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../index.html"));
                                 }
                                 if(response.msg == "Token has been revoked"){
                                     localStorage.removeItem("EMPLOYEE_TOKEN");
-                                    location.href = "../login.html";
+                                    location.href = "../index.html";
                                 }
                                 if(sessionStorage.getItem("message")){
                                     const alertContainer = document.getElementById("alert-container");
@@ -269,7 +269,7 @@ if(EMPLOYEE_TOKEN != null){
                                 logoutATAPI(access_token).then(response => {
                                     if(response.msg == "Successfully logged out"){
                                         localStorage.removeItem("EMPLOYEE_TOKEN");
-                                        location.href = "../login.html";
+                                        location.href = "../index.html";
                                     }
                                 });
                             });
@@ -280,11 +280,11 @@ if(EMPLOYEE_TOKEN != null){
                             .then(response => {
                                 if(response.msg =="token expired"){
                                     refreshTokenAPI(access_token)
-                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../login.html"));
+                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../index.html"));
                                 }
                                 if(response.msg == "Token has been revoked"){
                                     localStorage.removeItem("EMPLOYEE_TOKEN");
-                                    location.href = "../login.html";
+                                    location.href = "../index.html";
                                 }
                                 if(sessionStorage.getItem("message")){
                                     const alertContainer = document.getElementById("alert-container");
@@ -304,7 +304,7 @@ if(EMPLOYEE_TOKEN != null){
                                 logoutATAPI(access_token).then(response => {
                                     if(response.msg == "Successfully logged out"){
                                         localStorage.removeItem("EMPLOYEE_TOKEN");
-                                        location.href = "../login.html";
+                                        location.href = "../index.html";
                                     }
                                 });
                             });
@@ -315,11 +315,11 @@ if(EMPLOYEE_TOKEN != null){
                             .then(response => {
                                 if(response.msg =="token expired"){
                                     refreshTokenAPI(access_token)
-                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../login.html"));
+                                        .then(response => isTokenExpired(response, "EMPLOYEE_TOKEN", "../index.html"));
                                 }
                                 if(response.msg == "Token has been revoked"){
                                     localStorage.removeItem("EMPLOYEE_TOKEN");
-                                    location.href = "../login.html";
+                                    location.href = "../index.html";
                                 }
                                 if(sessionStorage.getItem("message")){
                                     const alertContainer = document.getElementById("alert-container");
@@ -339,7 +339,7 @@ if(EMPLOYEE_TOKEN != null){
                                 logoutATAPI(access_token).then(response => {
                                     if(response.msg == "Successfully logged out"){
                                         localStorage.removeItem("EMPLOYEE_TOKEN");
-                                        location.href = "../login.html";
+                                        location.href = "../index.html";
                                     }
                                 });
                             });
